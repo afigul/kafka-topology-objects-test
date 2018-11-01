@@ -20,8 +20,7 @@ public class Processor {
     public Topology createTopology() {
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Address> stream = builder.<String, Address>stream("source");
-
-        stream.to("sink");
+        stream.filter((s, address) -> !address.getCity().equalsIgnoreCase("Bielefeld")).to("sink");
         return builder.build();
     }
 
