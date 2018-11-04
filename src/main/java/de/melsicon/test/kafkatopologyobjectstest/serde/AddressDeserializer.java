@@ -1,6 +1,7 @@
-package de.melsicon.test.kafkatopologyobjectstest;
+package de.melsicon.test.kafkatopologyobjectstest.serde;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.melsicon.test.kafkatopologyobjectstest.model.Address;
 import org.apache.kafka.common.serialization.Deserializer;
 
 import java.util.Map;

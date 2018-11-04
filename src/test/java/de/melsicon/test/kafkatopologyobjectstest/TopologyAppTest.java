@@ -1,6 +1,7 @@
 package de.melsicon.test.kafkatopologyobjectstest;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
+import de.melsicon.test.kafkatopologyobjectstest.model.Address;
+import de.melsicon.test.kafkatopologyobjectstest.serde.AddressSerde;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -9,7 +10,7 @@ import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.TopologyTestDriver;
 import org.apache.kafka.streams.test.ConsumerRecordFactory;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 

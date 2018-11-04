@@ -1,5 +1,6 @@
-package de.melsicon.test.kafkatopologyobjectstest;
+package de.melsicon.test.kafkatopologyobjectstest.serde;
 
+import de.melsicon.test.kafkatopologyobjectstest.model.Address;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serializer;

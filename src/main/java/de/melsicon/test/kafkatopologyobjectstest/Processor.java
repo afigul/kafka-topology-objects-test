@@ -1,6 +1,6 @@
 package de.melsicon.test.kafkatopologyobjectstest;
 
-import lombok.extern.java.Log;
+import de.melsicon.test.kafkatopologyobjectstest.model.Address;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;

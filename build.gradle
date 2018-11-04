@@ -1,19 +1,11 @@
 buildscript {
-    ext {
-        springBootVersion = '2.1.0.RELEASE'
-    }
     repositories {
         mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
 
 group = 'de.melsicon.test'
 version = '0.0.1-SNAPSHOT'
@@ -31,7 +23,7 @@ dependencies {
     testCompile 'io.confluent:kafka-avro-serializer:4.1.1'
     testCompile 'io.confluent:kafka-streams-avro-serde:4.1.1'
     testCompile 'io.confluent:kafka-schema-registry:4.1.1'
-    implementation('org.springframework.boot:spring-boot-starter-web')
-    compileOnly('org.projectlombok:lombok')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testCompile 'org.assertj:assertj-core:3.11.1'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
 }
