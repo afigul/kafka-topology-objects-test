@@ -17,9 +17,9 @@ import java.util.Properties;
 
 public class ProcessorTest {
 
-    private AddressSerde addressSerde;
     TopologyTestDriver topologyTestDriver;
     ConsumerRecordFactory factory;
+    private AddressSerde addressSerde;
 
     @BeforeEach
     void setUp() {
@@ -39,7 +39,7 @@ public class ProcessorTest {
     public void testNonFilteredValues() {
         topologyTestDriver.pipeInput(factory.create("source", Address.builder().city("Frankfurt").build()));
 
-        ProducerRecord<String,Address> readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
+        ProducerRecord<String, Address> readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
         Assertions.assertThat(readOutput.value()).isNotNull();
         Assertions.assertThat(readOutput.value().getCity()).isEqualTo("Frankfurt");
     }
@@ -48,7 +48,7 @@ public class ProcessorTest {
     public void testFilteredValues() {
         topologyTestDriver.pipeInput(factory.create("source", Address.builder().city("Bielefeld").build()));
 
-        ProducerRecord<String,Address> readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
+        ProducerRecord<String, Address> readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
         Assertions.assertThat(readOutput).isNull();
     }
 }
