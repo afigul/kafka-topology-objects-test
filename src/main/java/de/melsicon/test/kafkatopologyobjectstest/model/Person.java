@@ -13,6 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Person {
+    @Builder.Default
     private String id = UUID.randomUUID().toString();
     private String name;
     private String surname;

@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AdressChangeEvent {
+    @Builder.Default
     private String id = UUID.randomUUID().toString();
     private Address newAddress;
 }
