@@ -21,6 +21,7 @@ public class Processor {
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Address> stream = builder.<String, Address>stream("source");
         stream.filter((s, address) -> !address.getCity().equalsIgnoreCase("Bielefeld")).to("sink");
+
         return builder.build();
     }
 
