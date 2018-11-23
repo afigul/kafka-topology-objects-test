@@ -51,4 +51,42 @@ public class ProcessorTest {
         ProducerRecord<String, Address> readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
         Assertions.assertThat(readOutput).isNull();
     }
+
+    @Test
+    public void testFilteredMultibleValues() {
+        topologyTestDriver.pipeInput(factory.create("source", Address.builder().city("Bielefeld").build()));
+        topologyTestDriver.pipeInput(factory.create("source", Address.builder().city("Frankfurt").build()));
+        topologyTestDriver.pipeInput(factory.create("source", Address.builder().city("Bielefeld").build()));
+        topologyTestDriver.pipeInput(factory.create("source", Address.builder().city("Bielefeld").build()));
+        topologyTestDriver.pipeInput(factory.create("source", Address.builder().city("Frankfurt").build()));
+        topologyTestDriver.pipeInput(factory.create("source", Address.builder().city("Bielefeld").build()));
+
+        ProducerRecord<String, Address> readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
+        Assertions.assertThat(readOutput.value()).isNotNull();
+        Assertions.assertThat(readOutput.value().getCity()).isEqualTo("Frankfurt");
+
+        readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
+        Assertions.assertThat(readOutput.value()).isNotNull();
+        Assertions.assertThat(readOutput.value().getCity()).isEqualTo("Frankfurt");
+
+        readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
+        Assertions.assertThat(readOutput).isNull();
+    }
+
+    @Test
+    public void testFilteredMultibleValuesUpdateWithKey() {
+        topologyTestDriver.pipeInput(factory.create("source", "key1", Address.builder().city("Bielefeld").build()));
+        topologyTestDriver.pipeInput(factory.create("source", "key2",  Address.builder().city("Frankfurt").build()));
+        topologyTestDriver.pipeInput(factory.create("source", "key3",  Address.builder().city("Bielefeld").build()));
+        topologyTestDriver.pipeInput(factory.create("source", "key4",  Address.builder().city("Bielefeld").build()));
+        topologyTestDriver.pipeInput(factory.create("source", "key2",  Address.builder().city("Frankfurt").build()));
+        topologyTestDriver.pipeInput(factory.create("source", "key1", Address.builder().city("Bielefeld").build()));
+
+        ProducerRecord<String, Address> readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
+        Assertions.assertThat(readOutput.value()).isNotNull();
+        Assertions.assertThat(readOutput.value().getCity()).isEqualTo("Frankfurt");
+
+        readOutput = topologyTestDriver.readOutput("sink", Serdes.String().deserializer(), addressSerde.deserializer());
+        Assertions.assertThat(readOutput).isNull();
+    }
 }
