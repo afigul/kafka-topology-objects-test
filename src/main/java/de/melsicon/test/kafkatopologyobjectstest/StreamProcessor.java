@@ -6,21 +6,23 @@ import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.KStream;
+import org.apache.kafka.streams.kstream.KTable;
 
 import java.util.Properties;
 
 @Slf4j
-public class Processor {
+public class StreamProcessor {
     private KafkaStreams streams;
 
-    public Processor(Properties props) {
+    public StreamProcessor(Properties props) {
         this.streams = new KafkaStreams(createTopology(), props);
     }
 
     public Topology createTopology() {
         StreamsBuilder builder = new StreamsBuilder();
         KStream<String, Address> stream = builder.<String, Address>stream("source");
-        stream.filter((s, address) -> !address.getCity().equalsIgnoreCase("Bielefeld")).to("sink");
+        stream = stream.filter((s, address) -> !address.getCity().equalsIgnoreCase("Bielefeld"));
+        stream.to("sink");
 
         return builder.build();
     }

@@ -6,6 +6,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply from: 'dependencies.gradle'
 
 group = 'de.melsicon.test'
 version = '0.0.1-SNAPSHOT'
@@ -17,13 +18,13 @@ repositories {
 
 
 dependencies {
-    compile 'org.apache.kafka:kafka-streams:1.1.1-cp1'
-    compile 'org.apache.kafka:kafka-clients:1.1.1-cp1'
-    testCompile 'org.apache.kafka:kafka-streams-test-utils:1.1.1-cp1'
-    testCompile 'io.confluent:kafka-avro-serializer:4.1.1'
-    testCompile 'io.confluent:kafka-streams-avro-serde:4.1.1'
-    testCompile 'io.confluent:kafka-schema-registry:4.1.1'
-    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
-    testCompile 'org.assertj:assertj-core:3.11.1'
-    compileOnly 'org.projectlombok:lombok:1.18.4'
+    compile group: 'org.apache.kafka', name: 'kafka-streams', version: ver.kafka
+    compile group: 'org.apache.kafka', name: 'kafka-clients', version: ver.kafka
+    testCompile group: 'org.apache.kafka', name: 'kafka-streams-test-utils', version: ver.kafka
+    testCompile group: 'io.confluent', name: 'kafka-avro-serializer', version: ver.confluent
+    //testCompile group: 'io.confluent', name: 'kafka-streams-avro-serde', version: ver.confluent
+    //testCompile group: 'io.confluent', name: 'kafka-schema-registry', version: ver.confluent
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.11.1'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.4'
 }

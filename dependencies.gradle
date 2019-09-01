@@ -1,0 +1,6 @@
+ext {
+    ver = [
+            kafka: '2.2.1',
+            confluent: '5.2.1',
+    ]
+}

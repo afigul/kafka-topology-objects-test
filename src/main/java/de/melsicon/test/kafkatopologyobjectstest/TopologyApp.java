@@ -6,9 +6,9 @@ public class TopologyApp {
 
     public static void main(String[] args) {
         Properties props = new Properties();
-        Processor processor = new Processor(props);
-        processor.start();
-        Runtime.getRuntime().addShutdownHook(new Thread(processor::stop));
+        StreamProcessor streamProcessor = new StreamProcessor(props);
+        streamProcessor.start();
+        Runtime.getRuntime().addShutdownHook(new Thread(streamProcessor::stop));
     }
 
 }
